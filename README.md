@@ -37,8 +37,8 @@ Paste the below URL into your browser and use the test data below.
 ```
 
 ### Docker compose
-Include:
-1. Postgres
-2. Jaeger
-3. prometheus and Grafana
-4. 
+You need docker engine(https://docs.docker.com/engine/install/) installed on your local machine to run the project as a quick start.
+
+```
+	docker compose up
+```
