@@ -42,3 +42,11 @@ You need docker engine(https://docs.docker.com/engine/install/) installed on you
 ```
 	docker compose up
 ```
+
+
+## Author
+- [Tebogo Bareetseng](https://github.com/tebogobar)
+- Email : tebogobar@gmail.com
+- Cell : 0682433564
+
+

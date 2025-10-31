@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   postgres:
     image: postgres:15
@@ -47,7 +48,8 @@ services:
     image: jaegertracing/all-in-one:1.56
     container_name: jaeger
     environment:
-      COLLECTOR_ZIPKIN_HTTP_PORT: 9411
+      - COLLECTOR_OTLP_ENABLED=true
+      - COLLECTOR_OTLP_HTTP_ENABLED=true
     ports:
       - "16686:16686"
       - "6831:6831/udp"
@@ -102,7 +104,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       MANAGEMENT_TRACING_ENABLED: true
-      MANAGEMENT_TRACING_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      MANAGEMENT_OTLP_TRACING_PROTOCOL: grpc
+      MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318
       MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED: true
       MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "*"
     ports:

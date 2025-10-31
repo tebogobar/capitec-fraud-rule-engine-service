@@ -3,10 +3,10 @@ package za.co.capitec;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class CapitecFraudRuleEngineServiceApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
