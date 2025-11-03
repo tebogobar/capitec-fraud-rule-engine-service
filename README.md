@@ -31,7 +31,7 @@ Paste the below URL into your browser and use the test data below.
 
 #### Create a new Transaction
 
-#####	*ENDPOINT :* 
+#####	*ENDPOINT : http://localhost:8080/fraud/createTransaction* 
 	
 ```
 	
@@ -45,14 +45,29 @@ Paste the below URL into your browser and use the test data below.
 ```
 
 
+#####	*ENDPOINT : http://localhost:8080/fraud/transactionID* 
+```
+	Used to get/fetch a specific transaction by ID.
+```
+
+#####	*ENDPOINT : http://localhost:8080/fraud/getTransactions* 
+```
+	Used to get/fetch all transactions.
+```
+
+
+
 ##### TRACES
 View traces of all your transactions and logs on Jaeger UI using the below URL.
 
  - *http://localhost:16686/search*
+
 
 ## Author
 - [Tebogo Bareetseng](https://github.com/tebogobar)
 - Email : tebogobar@gmail.com
 - Cell : 0682433564
 
+---
+*I would have loved to expand this project but just added a few tools i normally use - But this was an interesting assessment despite not having some the tools fully functional*
 
