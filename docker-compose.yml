@@ -14,7 +14,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - capitec-net
+      - capitec-network
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -25,7 +25,7 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - capitec-net
+      - capitec-network
 
   kafka:
     image: confluentinc/cp-kafka:7.5.0
@@ -42,7 +42,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
-      - capitec-net
+      - capitec-network
 
   jaeger:
     image: jaegertracing/all-in-one:1.56
@@ -51,16 +51,16 @@ services:
       - COLLECTOR_OTLP_ENABLED=true
       - COLLECTOR_OTLP_HTTP_ENABLED=true
     ports:
-      - "16686:16686"
-      - "6831:6831/udp"
-      - "6832:6832/udp"
-      - "5778:5778"
-      - "4317:4317"
-      - "4318:4318"
-      - "14268:14268"
-      - "14250:14250"
+      - "16686:16686"	#UI
+      - "6831:6831/udp"	#
+      - "6832:6832/udp"	#fails export
+      - "5778:5778"		#fails export
+      - "4317:4317"		#fails export
+      - "4318:4318"		#Fails export
+      - "14268:14268"	#Fails spans
+      - "14250:14250"	#fails export
     networks:
-      - capitec-net
+      - capitec-network
 
   prometheus:
     image: prom/prometheus:v2.55.0
@@ -72,7 +72,7 @@ services:
     ports:
       - "9090:9090"
     networks:
-      - capitec-net
+      - capitec-network
 
   grafana:
     image: grafana/grafana:11.2.0
@@ -85,7 +85,7 @@ services:
     depends_on:
       - prometheus
     networks:
-      - capitec-net
+      - capitec-network
     volumes:
       - grafana_data:/var/lib/grafana
 
@@ -104,19 +104,19 @@ services:
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       MANAGEMENT_TRACING_ENABLED: true
-      MANAGEMENT_OTLP_TRACING_PROTOCOL: grpc
-      MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318
+      MANAGEMENT_OTLP_TRACING_PROTOCOL: http/protobuf
+      MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318/v1/traces
       MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED: true
       MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "*"
     ports:
       - "8080:8080"
     networks:
-      - capitec-net
+      - capitec-network
 
 volumes:
   postgres_data:
   grafana_data:
 
 networks:
-  capitec-net:
+  capitec-network:
     driver: bridge

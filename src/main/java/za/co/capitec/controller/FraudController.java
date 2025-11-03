@@ -34,16 +34,19 @@ public class FraudController {
 
 	@GetMapping("/getTransactions")
 	public ResponseEntity<List<Transaction>> getAll() {
+		LOGGER.info("Fetching all transactions");
 		return ResponseEntity.ok(service.getAll());
 	}
 
 	@GetMapping("/flagged")
 	public ResponseEntity<List<Transaction>> getFlagged() {
+		LOGGER.info("Flagged transactions");
 		return ResponseEntity.ok(service.getFlagged());
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Transaction> getById(@PathVariable Long id) {
+		LOGGER.info("Get transaction by ID");
 		Transaction tx = service.getById(id);
 		if (tx == null)
 			return ResponseEntity.notFound().build();
